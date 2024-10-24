@@ -2,13 +2,13 @@
 
 a little api commandline tool to use the maas rest api
 
-## Usage:
+## Usage
 
 python3 maas-api.py [-h] [--get api_path] [--post api_path json_data] [--put api_path json_data] [--delete api_path]
 
 API Client CLI
 
-```
+```text
 Options:
   -h, --help                      show the help message and exit
   "--get" [api_path]              GET request to API path; --get is optional; without an option it's always a GET request
@@ -23,7 +23,7 @@ Location: `[projectfolder]/apis.json`
 
 Content:
 
-```
+```json
 {
     "apis": {
         "maas": {
@@ -34,20 +34,20 @@ Content:
 }
 ```
 
-## Remarks:
+## Remarks
 
 This Project will be added to Python's sys.path to be able to use this tool from every place.
 
 Regarding the API path, there is no convention on how to format it:
 
-```
+```text
 machines
 /machines
 machines/
 /machines/
 ```
 
-## Examples:
+## Examples
 
 `python3 maas-api.py tags`
 or
