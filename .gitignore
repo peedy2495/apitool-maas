@@ -1,3 +1,6 @@
+# app config file with secrets - content: refer README-md
+api.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
