@@ -1,0 +1,12 @@
+{
+    "apis": {
+        "maas": {
+            "key": "RqNvGNVLF8UR39w2HX:DGA6xCu5H75MxRjWwg:VrFhKgeCB7Yz37y7eWbc5S9tmDWLy7Hd",
+            "api_address": "http://192.168.122.100:5240"
+        },
+        "semaphore": {
+            "token": "bfe001",
+            "api_address": "https://192.168.122.34"
+        }
+    }
+}

@@ -19,7 +19,7 @@ Options:
 
 ## Configuration
 
-Location: `[projectfolder]/api.json`
+Location: `[projectfolder]/apis.json`
 
 Content:
 

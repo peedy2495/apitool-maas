@@ -11,7 +11,7 @@ from api.maas import maas
 
 def main():
     try:
-        with open(f'{current_dir}/api.json', 'r') as file:
+        with open(f'{current_dir}/apis.json', 'r') as file:
             config = json.load(file)
     except FileNotFoundError:
         sys.exit("Configuration file not found.")
