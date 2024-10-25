@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import json
+import importlib
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_path = os.path.join(current_dir, 'apitool-maas')
@@ -10,33 +11,46 @@ sys.path.append(project_path)
 from api.maas import maas
 
 def main():
-    maas_config = load_api_config(f'{current_dir}/apis.json', "maas")
+    api_type = "maas"
+    maas_config = load_api_config(f'{current_dir}/apis.json', api_type)
     maas_chk_cfg(maas_config)
+
+    config_parts = ", ".join(maas_config.values())
+    config_list = config_parts.split(", ")
+
+    api_module = importlib.import_module(f"api.{api_type}")
+    api_class = getattr(api_module, api_type)
 
     arg_options = ('-h','--help' ,'--get', '--post', '--put', '--delete')
     
     if len(sys.argv) > 2 and sys.argv[1] in arg_options:
         args = parse_args()
         if args.get:
-            response = maas.get(maas_config["key"], maas_config["api_address"], args.get)
+            config_list.append(args.get)
+            response = api_class.get(*config_list)
         
         elif args.post:
             api_path, json_data = args.post
             json_ckeck(json_data)
-            response = maas.post(maas_config["key"], maas_config["api_address"], api_path, data)
+            config_list.extend([api_path, json_data])
+            response = api_class.post(*config_list)
 
         elif args.put:
             api_path, json_data = args.put
             json_ckeck(json_data)
-            response = maas.put(maas_config["key"], maas_config["api_address"], api_path, data)
+            config_list.extend([api_path, json_data])
+            response = api_class.put(*config_list)
 
         elif args.delete:
-            response = maas.delete(maas_config["key"], maas_config["api_address"], args.delete)
+            config_list.append(args.delete)
+            response = api_class.delete(*config_list)
 
     else:
         if len(sys.argv) == 2:
             api_path = sys.argv[1]
-            response = maas.get(maas_config["key"], maas_config["api_address"], api_path)
+            config_list.append(api_path)
+
+            response = api_class.get(*config_list)
         else:
             print("Error: No command or API path provided.")
             sys.exit(1)
@@ -60,17 +74,15 @@ def load_api_config(path, api_type):
 def parse_args():
     parser = argparse.ArgumentParser(description="API Client CLI")
     parser.add_argument('--get', metavar='api_path', help="GET request to API path")
-    parser.add_argument('--post', nargs=2, metavar=('api_path', 'json_data'), 
-                        help="POST request to API path with JSON data")
-    parser.add_argument('--put', nargs=2, metavar=('api_path', 'json_data'), 
-                        help="PUT request to API path with JSON data")
+    parser.add_argument('--post', nargs=2, metavar=('api_path', 'json_data'), help="POST request to API path with JSON data")
+    parser.add_argument('--put', nargs=2, metavar=('api_path', 'json_data'), help="PUT request to API path with JSON data")
     parser.add_argument('--delete', metavar='api_path', help="DELETE request to API path")
 
     return parser.parse_args()
 
 def json_ckeck(json_data):
     try:
-        data = json.loads(json_data)
+        json_data = json.loads(json_data)
     except json.JSONDecodeError:
         print("Error: Invalid JSON data.")
         sys.exit(1)

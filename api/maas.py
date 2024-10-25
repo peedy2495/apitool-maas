@@ -1,6 +1,7 @@
 import requests
 import uuid
 import time
+import json
 
 class maas:
     @staticmethod
@@ -29,7 +30,7 @@ class maas:
         return api_path
 
     @staticmethod
-    def get(api_key, api_address, api_path):
+    def get(api_address, api_key, api_path):
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
@@ -39,27 +40,29 @@ class maas:
         return response
 
     @staticmethod
-    def post(api_key, api_address, api_path, payload):
+    def post(api_address, api_key, api_path, payload):
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
         url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        payload = json.loads(payload)
 
-        response = requests.post(url, headers=headers, data=payload)
+        response = requests.post(url, headers=headers, json=payload)
         return response
 
     @staticmethod
-    def put(api_key, api_address, api_path, payload):
+    def put(api_address, api_key, api_path, payload):
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
         url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        payload = json.loads(payload)
 
-        response = requests.put(url, headers=headers, data=payload)
+        response = requests.put(url, headers=headers, json=payload)
         return response
     
     @staticmethod
-    def delete(api_key, api_address, api_path):
+    def delete(api_address, api_key, api_path):
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
