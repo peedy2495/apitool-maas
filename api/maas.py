@@ -39,9 +39,10 @@ class maas:
     @staticmethod
     def mk_api_base(config):
         maas._maas_chk_cfg(config)
-
-        config_parts = ", ".join(config.values())
-        api_base = config_parts.split(", ")
+        api_base = []
+        # enshure, that the content of api_base has the correct order!
+        api_base.append(config['api_address'])
+        api_base.append(config['key'])
 
         return api_base
 
