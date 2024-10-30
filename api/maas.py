@@ -28,6 +28,22 @@ class maas:
         if not api_path.endswith("/"):
             api_path += "/"
         return api_path
+    
+    @staticmethod
+    def _maas_chk_cfg(maas_config):
+        if maas_config["key"] is None:
+            raise ValueError("maas: api key not found in JSON file")
+        if maas_config["api_address"] is None:
+            raise ValueError("maas: api_address not found in JSON file")
+    
+    @staticmethod
+    def mk_api_base(config):
+        maas._maas_chk_cfg(config)
+
+        config_parts = ", ".join(config.values())
+        api_base = config_parts.split(", ")
+
+        return api_base
 
     @staticmethod
     def get(api_address, api_key, api_path):

@@ -1,4 +1,5 @@
 {
+    "default_api" : "maas",
     "apis": {
         "maas": {
             "api_address": "http://192.168.122.100:5240",
