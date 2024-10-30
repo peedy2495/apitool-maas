@@ -81,7 +81,7 @@ def load_api_config(path, api_type):
 def parse_args():
     parser = argparse.ArgumentParser(description="A script to handle API operations.")
 
-    parser.add_argument('--api', type=str, help="Specify the API name.")
+    parser.add_argument('--api', type=str, help="specify the target API name. The default is defined in apis.json.")
 
     action_group = parser.add_mutually_exclusive_group(required=True)
 
