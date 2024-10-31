@@ -3,6 +3,8 @@ import uuid
 import time
 import json
 
+api_prefix = "MAAS/api/2.0"
+
 class maas:
     @staticmethod
     def _headers(api_key):
@@ -48,7 +50,7 @@ class maas:
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
-        url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        url = f'{api_address}/{api_prefix}/{api_path}'
 
         response = requests.get(url, headers=headers)
         return response
@@ -58,7 +60,7 @@ class maas:
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
-        url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        url = f'{api_address}/{api_prefix}/{api_path}'
         payload = json.loads(payload)
 
         response = requests.post(url, headers=headers, json=payload)
@@ -69,7 +71,7 @@ class maas:
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
-        url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        url = f'{api_address}/{api_prefix}/{api_path}'
         payload = json.loads(payload)
 
         response = requests.put(url, headers=headers, json=payload)
@@ -80,7 +82,7 @@ class maas:
 
         api_path = maas._path_normalize(api_path)
         headers = maas._headers(api_key)
-        url = f'{api_address}/MAAS/api/2.0/{api_path}'
+        url = f'{api_address}/{api_prefix}/{api_path}'
 
         response = requests.delete(url, headers=headers)
         return response

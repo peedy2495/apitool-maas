@@ -43,7 +43,7 @@ def main():
         response = api_class.delete(*api_base)
 
     print(response.status_code)
-    print(response.text)
+    print(json.dumps(response.json(), indent=2))
 
 def load_default_api(path):
     try:
@@ -57,10 +57,10 @@ def load_default_api(path):
     return config["default_api"]
 
 def load_api(api_type, config_path):
-    importlib.import_module(f"api.{api_type}")
+    importlib.import_module(f"apis.{api_type}")
     config = load_api_config(config_path, api_type)
 
-    api_module = importlib.import_module(f"api.{api_type}")
+    api_module = importlib.import_module(f"apis.{api_type}")
     api_class = getattr(api_module, api_type)
 
     return config, api_class
