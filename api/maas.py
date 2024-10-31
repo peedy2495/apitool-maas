@@ -29,16 +29,13 @@ class maas:
             api_path += "/"
         return api_path
     
-    @staticmethod
-    def _maas_chk_cfg(maas_config):
-        if maas_config["key"] is None:
-            raise ValueError("maas: api key not found in JSON file")
-        if maas_config["api_address"] is None:
-            raise ValueError("maas: api_address not found in JSON file")
-    
+    # this helper function for maas is used to keep api calls in a main function generic
     @staticmethod
     def mk_api_base(config):
-        maas._maas_chk_cfg(config)
+        if config["key"] is None:
+            raise ValueError("maas: api key not found in JSON file")
+        if config["api_address"] is None:
+            raise ValueError("maas: api_address not found in JSON file")
         api_base = []
         # enshure, that the content of api_base has the correct order!
         api_base.append(config['api_address'])
