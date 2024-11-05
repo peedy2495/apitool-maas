@@ -43,6 +43,14 @@ def main():
         response = api_class.delete(*api_base)
 
     print(response.status_code)
+    try:
+        json_data = response.json()
+    except json.JSONDecodeError:
+        if 200 <= response.status_code <= 299:
+            print("Success")
+            sys.exit(0)
+        else:
+            sys.exit("Error - something went wrong")
     print(json.dumps(response.json(), indent=2))
 
 def load_default_api(path):
