@@ -39,3 +39,7 @@ Send a delete-request to the target API
     }
 }
 ```
+
+## API reference
+
+[https://semaphoreui.com/api-docs](https://semaphoreui.com/api-docs/)

@@ -39,3 +39,7 @@ Send a delete-request to the target API
     }
 }
 ```
+
+## API reference
+
+[https://maas.io/docs/api](https://maas.io/docs/api)

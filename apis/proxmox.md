@@ -40,3 +40,7 @@ Send a delete-request to the target API
     }
 }
 ```
+
+## API reference
+
+[https://pve.proxmox.com/pve-docs/api-viewer](https://pve.proxmox.com/pve-docs/api-viewer/index.html)
