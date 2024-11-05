@@ -46,5 +46,5 @@ Send a delete-request to the target API
 The running Nexus instance provides the current API-reference, itself.  
 You can reach the API-reference in the webUI under `Setup/Administration/System/API`
 
-**Official website:** 
+**Official website:**
 [https://help.sonatype.com/en/rest-and-integration-api.html](https://help.sonatype.com/en/rest-and-integration-api.html)
