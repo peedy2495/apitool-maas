@@ -50,7 +50,9 @@ def main():
             print("Success")
             sys.exit(0)
         else:
-            sys.exit("Error - something went wrong")
+            sys.exit("ERROR")
+    if not (200 <= response.status_code <= 299):
+        print("ERROR")
     print(json.dumps(response.json(), indent=2))
 
 def load_default_api(path):
